@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import "./styles/modern-dark.css";
+import AudioControlPanel from "./AudioControlPanel";
+import ChannelInfoBox from "./ChannelInfoBox";
 
 function App() {
   const [status, setStatus] = useState(null);
@@ -15,18 +18,30 @@ function App() {
   }, []);
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-      <h1>Redbot Remote Controller</h1>
+    <div className="app-container">
+      <h1>MUSika</h1>
+      <div
+        style={{
+          fontSize: "0.95rem",
+          color: "#2aa4db",
+          marginBottom: "1.2rem",
+          letterSpacing: "0.04em",
+        }}
+      >
+        #redbot
+      </div>
       {loading ? (
         <p>Loading bot status...</p>
       ) : status ? (
-        <div>
+        <div className="status-card">
           <h2>Bot Status</h2>
           <pre>{JSON.stringify(status, null, 2)}</pre>
         </div>
       ) : (
         <p>Could not fetch bot status.</p>
       )}
+      <AudioControlPanel />
+      <ChannelInfoBox channelName="#music-room" />
     </div>
   );
 }
